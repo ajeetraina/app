@@ -2,7 +2,7 @@ debug: true
 mysql:
   image:
     version: 5.6
-  rootpass: axx[<^cz3d.fPb
+  rootpass: wordpress101
   database: wordpressdata
   user:
     name: wordpress
