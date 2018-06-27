@@ -1,9 +1,9 @@
-version: 0.1.0
+version: 1.0.0
 name: wordpress
-description: ""
+description: "Welcome to Collabnix"
 maintainers:
-  - name: sakuya.izayoi
-    email: sizayoi@sdmansion.jp
+  - name: ajeetraina
+    email: ajeetraina@gmail.com
 targets:
   swarm: true
   kubernetes: true
