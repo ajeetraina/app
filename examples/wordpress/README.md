@@ -1,4 +1,7 @@
-## Simple wordpress + mysql app
+## Using ```docker-app``` tool to share your Application on DockerHub
+
+The docker-app is a new tool which allows you to share your complete application on Dockerhub(rather than just a Docker Image). It is still an experimental utility to help make Compose files more reusable and sharable.
+
 
 ### Visualize app configuration
 
@@ -17,7 +20,7 @@ services:
       MYSQL_USER: wordpress
     image: mysql:8
     volumes:
-    - type: volume
+    - type: db_data
       source: db_data
       target: /var/lib/mysql
   wordpress:
@@ -144,7 +147,7 @@ Maintained by: sakuya.izayoi <sizayoi@sdmansion.jp>
 Setting                  Default
 -------                  -------
 mysql.user.password      wordpress
-mysql.rootpass           axx[<^cz3d.fPb
+mysql.rootpass           wordpress101
 mysql.database           wordpressdata
 mysql.user.name          wordpress
 volumes.db_data.name     db_data
