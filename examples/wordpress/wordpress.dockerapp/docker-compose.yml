@@ -40,7 +40,8 @@ services:
       - mysql
 
 volumes:
-  db_data: ${volumes.db_data.name}
+  db_data: 
+     name: ${volumes.db_data.name}
 
 networks:
   overlay:
