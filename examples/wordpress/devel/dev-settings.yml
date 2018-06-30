@@ -1,0 +1,3 @@
+debug: true
+wordpress:
+  port: 8082
