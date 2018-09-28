@@ -72,3 +72,22 @@ networks:
   elk:
     driver: bridge
 ```
+
+```
+root@ubuntu:~/app/examples/elk# docker-app inspect elk
+openusmelk 0.1.0
+
+Maintained by: Ajeet_Raina <ajeetraina@gmail.com>
+
+ELK for OpenUSM
+
+Services (3)  Replicas Ports     Image
+------------  -------- -----     -----
+logstash      1        5000      docker.elastic.co/logstash/logstash-oss:6.4.1
+kibana        1        5601      docker.elastic.co/kibana/kibana-oss:6.4.1
+elasticsearch 1        9200,9300 docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.1
+
+Network (1)
+-----------
+elk
+```
