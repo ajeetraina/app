@@ -1,1 +1,6 @@
-
+version: 1.0
+name: openusm_elk
+description: "ELK for OpenUSM"
+maintainers:
+  - name: Ajeet_Raina
+    email: ajeetraina@gmail.com
