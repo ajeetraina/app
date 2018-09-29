@@ -24,5 +24,4 @@ kibana:
     mode: replicated
     replicas: 1
     endpoint_mode: dnsrr
-  ports:
-    - "5601:5601"
+  port: 5601
