@@ -18,9 +18,9 @@ services:
     networks:
       - elk
     deploy:
-      mode: ${elasticsearch.scale.mode}
-      replicas: ${elasticsearch.scale.replicas}
-      endpoint_mode: ${elasticsearch.scale.endpoint_mode}
+      mode: ${elasticsearch.deploy.mode}
+      replicas: ${elasticsearch.deploy.replicas}
+      endpoint_mode: ${elasticsearch.deploy.endpoint_mode}
   kibana:
     image: kibana:${kibana.image.version}
     ports:
@@ -30,9 +30,9 @@ services:
     networks:
       - elk
     deploy:
-      mode: ${kibana.scale.mode}
-      replicas: ${kibana.scale.replicas}
-      endpoint_mode: ${kibana.scale.endpoint_mode}
+      mode: ${kibana.deploy.mode}
+      replicas: ${kibana.deploy.replicas}
+      endpoint_mode: ${kibana.deploy.endpoint_mode}
     healthcheck:
       test: wget -qO- http://localhost:5601 > /dev/null
       interval: 30s
@@ -48,9 +48,9 @@ services:
     networks:
       - elk
     deploy:
-      mode: ${logstash.scale.mode}
-      replicas: ${logstash.scale.replicas}
-      endpoint_mode: ${logstash.scale.endpoint_mode}
+      mode: ${logstash.deploy.mode}
+      replicas: ${logstash.deploy.replicas}
+      endpoint_mode: ${logstash.deploy.endpoint_mode}
 
 networks:
   elk:
