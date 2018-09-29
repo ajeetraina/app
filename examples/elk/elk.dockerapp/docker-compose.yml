@@ -6,7 +6,7 @@ services:
     command: elasticsearch -Enetwork.host=0.0.0.0 -Ediscovery.zen.ping.unicast.hosts=elasticsearch
     environment:
       ES_JAVA_OPTS: -Xms2g -Xmx2g
-    image: ${elasticsearch.image.name}:${elasticsearch.image.tag}
+    image: ${elasticsearch.image.name}: ${elasticsearch.image.tag}
     ulimits:
       memlock: -1
       nofile:
@@ -22,7 +22,7 @@ services:
       replicas: ${elasticsearch.deploy.replicas}
       endpoint_mode: ${elasticsearch.deploy.endpoint_mode}
   kibana:
-    image: ${kibana.image.version}:${kibana.image.tag}
+    image: ${kibana.image.version}: ${kibana.image.tag}
     ports:
       - "${kibana.port}:5601"
     environment:
@@ -40,7 +40,7 @@ services:
   logstash:
     hostname: logstash
     command: sh -c "logstash -e 'input { syslog  { type => syslog port => 10514   } gelf { } } output { stdout { codec => rubydebug } elasticsearch { hosts => [ \"elasticsearch\" ] } }'"
-    image: ${logstash.image.name}:${logstash.image.tag}
+    image: ${logstash.image.name}: ${logstash.image.tag}
     ports:
         - "10514:10514/tcp"
         - "10514:10514/udp"
