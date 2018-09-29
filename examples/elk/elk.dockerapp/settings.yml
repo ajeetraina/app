@@ -8,7 +8,7 @@ elastisearch:
     replicas: 2
 logstash:
   image:
-    version: 6.4.1
+    version: alpine
   scale:
     mode: replicated
     replicas: 1
