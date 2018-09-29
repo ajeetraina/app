@@ -19,7 +19,7 @@ logstash:
     - "12201:12201/udp"
 kibana:
   image:
-    version: 6.4.1
+    version: latest
   scale:
     mode: replicated
     replicas: 1
