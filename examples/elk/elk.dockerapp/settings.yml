@@ -1,7 +1,7 @@
 debug: "true"
 elastisearch:
   image:
-    version: 6.4.1
+    version: 5
   scale:
     endpoint_mode: dnsrr
     mode: replicated
