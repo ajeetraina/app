@@ -11,29 +11,41 @@ The docker-app is a new tool which allows you to share your complete application
 version: "3.3"
 services:
   elasticsearch:
+    command:
+    - elasticsearch
+    - -Enetwork.host=0.0.0.0
+    - -Ediscovery.zen.ping.unicast.hosts=elasticsearch
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: dnsrr
     environment:
-      ES_JAVA_OPTS: -Xmx256m -Xms256m
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.1
+      ES_JAVA_OPTS: -Xms2g -Xmx2g
+    image: elasticsearch:5
     networks:
       elk: null
-    ports:
-    - mode: ingress
-      target: 9200
-      published: 9200
-      protocol: tcp
-    - mode: ingress
-      target: 9300
-      published: 9300
-      protocol: tcp
+    ulimits:
+      memlock: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+      nproc: 65538
     volumes:
-    - type: bind
-      source: elasticsearch/config/elasticsearch.yml
-      target: /usr/share/elasticsearch/config/elasticsearch.yml
-      read_only: true
+    - type: volume
+      target: /usr/share/elasticsearch/data
   kibana:
-    depends_on:
-    - elasticsearch
-    image: docker.elastic.co/kibana/kibana-oss:6.4.1
+    deploy:
+      mode: replicated
+      replicas: 1
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - wget -qO- http://localhost:5601 > /dev/null
+      interval: 30s
+      retries: 3
+    image: kibana:latest
     networks:
       elk: null
     ports:
@@ -41,53 +53,57 @@ services:
       target: 5601
       published: 5601
       protocol: tcp
-    volumes:
-    - type: bind
-      source: kibana/config
-      target: /usr/share/kibana/config
-      read_only: true
   logstash:
-    depends_on:
-    - elasticsearch
-    environment:
-      LS_JAVA_OPTS: -Xmx256m -Xms256m
-    image: docker.elastic.co/logstash/logstash-oss:6.4.1
+    command:
+    - sh
+    - -c
+    - logstash -e 'input { syslog  { type => syslog port => 10514   } gelf { } } output
+      { stdout { codec => rubydebug } elasticsearch { hosts => [ "elasticsearch" ]
+      } }'
+    deploy:
+      mode: replicated
+      replicas: 2
+    hostname: logstash
+    image: logstash:alpine
     networks:
       elk: null
     ports:
     - mode: ingress
-      target: 5000
-      published: 5000
+      target: 10514
+      published: 10514
       protocol: tcp
-    volumes:
-    - type: bind
-      source: logstash/config/logstash.yml
-      target: /usr/share/logstash/config/logstash.yml
-      read_only: true
-    - type: bind
-      source: logstash/pipeline
-      target: /usr/share/logstash/pipeline
-      read_only: true
+    - mode: ingress
+      target: 10514
+      published: 10514
+      protocol: udp
+    - mode: ingress
+      target: 12201
+      published: 12201
+      protocol: udp
 networks:
   elk:
-    driver: bridge
+    driver: overlay
+    driver_opts:
+      encrypted: "true"
 ```
 
 ```
-root@ubuntu:~/app/examples/elk# docker-app inspect elk
+$  docker-app inspect elk
 openusmelk 0.1.0
 
 Maintained by: Ajeet_Raina <ajeetraina@gmail.com>
 
 ELK for OpenUSM
 
-Services (3)  Replicas Ports     Image
-------------  -------- -----     -----
-logstash      1        5000      docker.elastic.co/logstash/logstash-oss:6.4.1
-kibana        1        5601      docker.elastic.co/kibana/kibana-oss:6.4.1
-elasticsearch 1        9200,9300 docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.1
+Services (3)  Replicas Ports             Image
+------------  -------- -----             -----
+elasticsearch 1                          elasticsearch:5
+kibana        1        5601              kibana:latest
+logstash      2        10514,10514,12201 logstash:alpine
 
 Network (1)
 -----------
 elk
 ```
+
+
