@@ -1,21 +1,24 @@
 debug: "true"
 elastisearch:
   image:
-    version: 5
+    name: elasticsearch
+    tag: 5
   deploy:
     endpoint_mode: dnsrr
     mode: replicated
     replicas: 2
 logstash:
   image:
-    version: alpine
+    name: logstash
+    tag: alpine
   deploy:
     mode: replicated
     replicas: 1
     endpoint_mode: dnsrr
 kibana:
   image:
-    version: latest
+    name: kibana
+    tag: latest
   deploy:
     mode: replicated
     replicas: 1
