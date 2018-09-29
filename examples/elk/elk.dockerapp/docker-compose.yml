@@ -19,7 +19,7 @@ services:
       - elk
     deploy:
       mode: ${elasticsearch.scale.mode}
-      replicas: ${elastisearch.scale.replicas}
+      replicas: ${elasticsearch.scale.replicas}
       endpoint_mode: ${elasticsearch.scale.endpoint_mode}
   kibana:
     image: kibana:${kibana.image.version}
