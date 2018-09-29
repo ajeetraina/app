@@ -1,1 +1,28 @@
-
+debug: "true"
+elastisearch:
+  image:
+    version: 6.4.1
+  scale:
+    endpoint_mode: dnsrr
+    mode: replicated
+    replicas: 2
+logstash:
+  image:
+    version: 6.4.1
+  scale:
+    mode: replicated
+    replicas: 1
+    endpoint_mode: dnsrr
+  ports:
+    - "10514:10514/tcp"
+    - "10514:10514/udp"
+    - "12201:12201/udp"
+kibana:
+  image:
+    version: 6.4.1
+  scale:
+    mode: replicated
+    replicas: 1
+    endpoint_mode: dnsrr
+  ports:
+    - "5601:5601"
