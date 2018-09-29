@@ -2,25 +2,21 @@ debug: "true"
 elastisearch:
   image:
     version: 5
-  scale:
+  deploy:
     endpoint_mode: dnsrr
     mode: replicated
     replicas: 2
 logstash:
   image:
     version: alpine
-  scale:
+  deploy:
     mode: replicated
     replicas: 1
     endpoint_mode: dnsrr
-  ports:
-    - "10514:10514/tcp"
-    - "10514:10514/udp"
-    - "12201:12201/udp"
 kibana:
   image:
     version: latest
-  scale:
+  deploy:
     mode: replicated
     replicas: 1
     endpoint_mode: dnsrr
