@@ -1,26 +1,22 @@
-debug: "true"
-elastisearch:
+elasticsearch:
   image:
-    name: elasticsearch
-    tag: 5
+    name: elasticsearch:5
   deploy:
-    endpoint_mode: dnsrr
     mode: replicated
     replicas: 2
-logstash:
-  image:
-    name: logstash
-    tag: alpine
-  deploy:
-    mode: replicated
-    replicas: 1
     endpoint_mode: dnsrr
 kibana:
   image:
-    name: kibana
-    tag: latest
+    name: kibana:latest
+  port: 5601
   deploy:
     mode: replicated
-    replicas: 1
+    replicas: 2
     endpoint_mode: dnsrr
-  port: 5601
+logstash:
+  image:
+    name: logstash:alpine
+  deploy:
+    mode: replicated
+    replicas: 2
+    endpoint_mode: dnsrr
