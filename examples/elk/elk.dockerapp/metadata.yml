@@ -1,6 +1,6 @@
 version: 0.1.0
-name: openusmelk
-description: "ELK for OpenUSM"
+name: myelk
+description: "ELK using Dockerapp"
 maintainers:
   - name: Ajeet_Raina
     email: ajeetraina@gmail.com
