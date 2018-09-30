@@ -4,7 +4,7 @@ services:
     command: elasticsearch -Enetwork.host=0.0.0.0 -Ediscovery.zen.ping.unicast.hosts=elasticsearch
     environment:
       ES_JAVA_OPTS: -Xms2g -Xmx2g
-      image: ${elasticsearch.image.name}
+    image: ${elasticsearch.image.name}
     volumes:
       - /usr/share/elasticsearch/data
     networks:
@@ -12,7 +12,7 @@ services:
     deploy:
       mode: ${elasticsearch.deploy.mode}
       replicas: ${elasticsearch.deploy.replicas}
-      endpoint_mode: ${elasticsearch.deploy.endpoint_mode}
+     
   kibana:
     image: ${kibana.image.name}
     ports:
@@ -24,7 +24,7 @@ services:
     deploy:
       mode: ${kibana.deploy.mode}
       replicas: ${kibana.deploy.replicas}
-      endpoint_mode: ${kibana.deploy.endpoint_mode}
+      
     healthcheck:
       test: wget -qO- http://localhost:5601 > /dev/null
       interval: 30s
@@ -42,7 +42,7 @@ services:
     deploy:
       mode: ${logstash.deploy.mode} 
       replicas: ${logstash.deploy.replicas}
-      endpoint_mode: ${logstash.deploy.endpoint_mode}
+      
 
 networks:
   elk:
