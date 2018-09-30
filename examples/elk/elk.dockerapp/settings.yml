@@ -4,7 +4,7 @@ elasticsearch:
   deploy:
     mode: replicated
     replicas: 2
-    endpoint_mode: dnsrr
+    
 kibana:
   image:
     name: kibana:latest
@@ -12,11 +12,11 @@ kibana:
   deploy:
     mode: replicated
     replicas: 2
-    endpoint_mode: dnsrr
+    
 logstash:
   image:
     name: logstash:alpine
   deploy:
     mode: replicated
     replicas: 2
-    endpoint_mode: dnsrr
+    
