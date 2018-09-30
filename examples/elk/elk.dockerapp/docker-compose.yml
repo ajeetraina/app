@@ -23,9 +23,9 @@ services:
     networks:
       - elk
     deploy:
-      mode: replicated
-      replicas: 1
-      endpoint_mode: dnsrr
+      mode: ${kibana.deploy.mode}
+      replicas: ${kibana.deploy.replicas}
+      endpoint_mode: ${kibana.deploy.endpoint_mode}
     healthcheck:
       test: wget -qO- http://localhost:5601 > /dev/null
       interval: 30s
@@ -42,9 +42,9 @@ services:
     networks:
       - elk
     deploy:
-      mode: replicated
-      replicas: 2
-      endpoint_mode: dnsrr
+      mode: ${logstash.deploy.mode}
+      replicas: ${logstash.deploy.replicas}
+      endpoint_mode: ${logstash.deploy.endpoint_mode}
 networks:
   elk:
     driver: overlay
