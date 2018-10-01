@@ -46,6 +46,29 @@ Experimental: off
 Renderers:    none
 ```
 
+Say, you have already created a docker compose for ELK stack application. Put it under the same directory. Now with docker-app installed let's create an Application Package based on this Compose file:
+
+```
+$ docker-app init elk
+```
+
+Once you run thie above command, it create a new directory elk.dockerapp that contains three different YAML files:
+
+```
+docker-compose.yml  elk.dockerapp
+[manager1] (local) root@192.168.0.30 ~/myelk
+$ tree elk.dockerapp/
+elk.dockerapp/
+├── docker-compose.yml
+├── metadata.yml
+└── settings.yml
+
+0 directories, 3 files
+
+```
+
+Edit each of these files as shown under this link.
+
 ## Rendering Docker Compose file
 
 ```
