@@ -1,0 +1,19 @@
+elasticsearch:
+  deploy:
+    mode: replicated
+    replicas: 2
+  image:
+    name: elasticsearch:5
+kibana:
+  deploy:
+    mode: replicated
+    replicas: 2
+  image:
+    name: kibana:latest
+  port: 5601
+logstash:
+  deploy:
+    mode: replicated
+    replicas: 2
+  image:
+    name: logstash:alpine
