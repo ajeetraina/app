@@ -2,5 +2,5 @@ description: ELK using Dockerapp
 keywords: []
 maintainers:
 - name: Ajeet_Raina <ajeetraina@gmail.com>
-name: myelk
+name: elk
 version: 0.1.0
