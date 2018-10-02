@@ -1,0 +1,79 @@
+
+apiversion: v1beta2
+kind: stacks.compose.docker.com
+metadata:
+  annotations: {}
+  clustername: ""
+  creationtimestamp: "0001-01-01T00:00:00Z"
+  deletiongraceperiodseconds: null
+  deletiontimestamp: null
+  finalizers: []
+  generatename: ""
+  generation: 0
+  initializers: null
+  labels: {}
+  name: elk
+  namespace: ""
+  ownerreferences: []
+  resourceversion: ""
+  selflink: ""
+  uid: ""
+spec:
+  services:
+  - command:
+    - elasticsearch
+    - -Enetwork.host=0.0.0.0
+    - -Ediscovery.zen.ping.unicast.hosts=elasticsearch
+    deploy:
+      mode: '{{.Values.elasticsearch.deploy.mode}}'
+      replicas: '{{.Values.elasticsearch.deploy.replicas}}'
+    environment:
+      ES_JAVA_OPTS: -Xms2g -Xmx2g
+    image: '{{.Values.elasticsearch.image.name}}'
+    name: elasticsearch
+    volumes:
+    - target: /usr/share/elasticsearch/data
+      type: volume
+  - deploy:
+      mode: '{{.Values.kibana.deploy.mode}}'
+      replicas: '{{.Values.kibana.deploy.replicas}}'
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    health_check:
+      interval: 30s
+      retries: 3
+      test:
+      - CMD-SHELL
+      - wget -qO- http://localhost:5601 > /dev/null
+    image: '{{.Values.kibana.image.name}}'
+    name: kibana
+    ports:
+    - mode: ingress
+      protocol: tcp
+      published: 5601
+      target: '{{.Values.kibana.port}}'
+  - command:
+    - sh
+    - -c
+    - logstash -e 'input { syslog  { type => syslog port => 10514   } gelf { } } output
+      { stdout { codec => rubydebug } elasticsearch { hosts => [ "elasticsearch" ]
+      } }'
+    deploy:
+      mode: '{{.Values.logstash.deploy.mode}}'
+      replicas: '{{.Values.logstash.deploy.replicas}}'
+    hostname: logstash
+    image: '{{.Values.logstash.image.name}}'
+    name: logstash
+    ports:
+    - mode: ingress
+      protocol: tcp
+      published: 10514
+      target: 10514
+    - mode: ingress
+      protocol: udp
+      published: 10514
+      target: 10514
+    - mode: ingress
+      protocol: udp
+      published: 12201
+      target: 12201
