@@ -140,10 +140,10 @@ docker-app-linux.tar.gz                      100%[==============================
 
 ## Verifying Docker-app version
 ```
-openusm@master01:~/app/examples/elk$ docker-app version
-Version:      v0.4.0
-Git commit:   525d93bc
-Built:        Tue Aug 21 13:02:46 2018
+openusm@master01:~/app$ docker-app version
+Version:      v0.6.0
+Git commit:   9f9c6680
+Built:        Thu Oct  4 13:30:33 2018
 OS/Arch:      linux/amd64
 Experimental: off
 Renderers:    none
