@@ -109,3 +109,47 @@ logstash.image.name                logstash:alpine
 ```
 
 
+# ELK Stack for Docker EE using Docker-app
+
+```
+openusm@master01:~/app/examples/elk$ sudo sh install-dockerapp
+--2018-10-16 01:20:45--  https://github.com/docker/app/releases/download/v0.4.0/docker-app-linux.tar.gz
+Resolving github.com (github.com)... 192.30.253.113, 192.30.253.112
+Connecting to github.com (github.com)|192.30.253.113|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://github-production-release-asset-2e65be.s3.amazonaws.com/128402269/b443a200-a553-11e8-804f-253442b219d6?X-Amz
+-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20181016%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=201810
+16T012046Z&X-Amz-Expires=300&X-Amz-Signature=7376c6278e43fbd483dc994b64a8fc19b842431b4a5c8afb722e44fcb136e453&X-Amz-SignedHead
+ers=host&actor_id=0&response-content-disposition=attachment%3B%20filename%3Ddocker-app-linux.tar.gz&response-content-type=appl
+ication%2Foctet-stream [following]
+--2018-10-16 01:20:46--  https://github-production-release-asset-2e65be.s3.amazonaws.com/128402269/b443a200-a553-11e8-804f-253
+442b219d6?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20181016%2Fus-east-1%2Fs3%2Faws4_request&X-
+Amz-Date=20181016T012046Z&X-Amz-Expires=300&X-Amz-Signature=7376c6278e43fbd483dc994b64a8fc19b842431b4a5c8afb722e44fcb136e453&X
+-Amz-SignedHeaders=host&actor_id=0&response-content-disposition=attachment%3B%20filename%3Ddocker-app-linux.tar.gz&response-co
+ntent-type=application%2Foctet-stream
+Resolving github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com)...
+ 52.216.1.8
+Connecting to github-production-release-asset-2e65be.s3.amazonaws.com (github-production-release-asset-2e65be.s3.amazonaws.com
+)|52.216.1.8|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 9109406 (8.7M) [application/octet-stream]
+Saving to: ‘docker-app-linux.tar.gz’
+docker-app-linux.tar.gz                      100%[===========================================================================================>]   8.69M   985KB/s    in 9.6s    
+2018-10-16 01:20:57 (928 KB/s) - ‘docker-app-linux.tar.gz’ saved [9109406/9109406]
+```
+
+## Verifying Docker-app version
+```
+openusm@master01:~/app/examples/elk$ docker-app version
+Version:      v0.4.0
+Git commit:   525d93bc
+Built:        Tue Aug 21 13:02:46 2018
+OS/Arch:      linux/amd64
+Experimental: off
+Renderers:    none
+```
+
+# 
+```
+
+```
