@@ -149,7 +149,26 @@ Experimental: off
 Renderers:    none
 ```
 
-# 
-```
+## 
+
+docker-app helm wordpress will output a Helm package in the ./wordpress.helm folder. --compose-file (or -c), --set (or -e) and --settings-files (or -s) flags apply the same way they do for the render subcommand.
 
 ```
+openusm@master01:~/app/examples/elk$ docker-app helm --stack-version=v1beta1
+```
+
+## Deploy WordPress Application on Kubernetes Cluster
+
+```
+openusm@master01:~/app/examples/wordpress$ docker-app deploy -o kubernetes
+top-level network "overlay" is ignored
+service "mysql": network "overlay" is ignored
+service "wordpress": network "overlay" is ignored
+service "wordpress": depends_on are ignored
+Waiting for the stack to be stable and running...
+wordpress: Ready                [pod status: 1/1 ready, 0/1 pending, 0/1 failed]
+
+```
+
+##
+
